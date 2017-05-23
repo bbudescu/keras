@@ -1,3 +1,4 @@
+import six
 from six.moves import range
 import numpy as np
 from .. import backend as K
@@ -70,7 +71,7 @@ def normalize_padding(value):
     except (TypeError, ValueError):
         pass
 
-    if isinstance(value, basestring):
+    if isinstance(value, six.string_types):
         return normalize_padding_dim(value)
 
     padding = []

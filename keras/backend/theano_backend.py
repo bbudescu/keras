@@ -1,3 +1,5 @@
+import six
+from six.moves import xrange
 from collections import defaultdict
 from contextlib import contextmanager
 import theano
@@ -1648,7 +1650,7 @@ def _preprocess_padding(padding, k_shape=None):
         :param k_dim: if not None, converts padding to ints
         :return:
         """
-        if isinstance(padding_dim, basestring):
+        if isinstance(padding_dim, six.string_types):
             if padding_dim == 'same':
                 if k_dim is None:
                     th_padding = 'half'
@@ -1670,7 +1672,7 @@ def _preprocess_padding(padding, k_shape=None):
             th_padding = int(padding_dim)
         return th_padding
 
-    if isinstance(padding, basestring):
+    if isinstance(padding, six.string_types):
         return preproc_padding_one_dim(padding)
     else:
         try:
@@ -1769,7 +1771,7 @@ def _postprocess_conv3d_output(conv_out, x,
             return conv_out[selector]
         return conv_out
 
-    if isinstance(padding, basestring):
+    if isinstance(padding, six.string_types):
         for dim in xrange(2, 4):
             conv_out = postprocess_single_mode(dim, padding)
     else:
